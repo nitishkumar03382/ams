@@ -1,0 +1,53 @@
+﻿@using AMS.Models
+@model Login
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Employee",
+        Value = "1",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Admin",
+        Value = "0"
+    });
+}
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>EXL Services Attendance Portal</h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Exl_logo_rgb_orange_pos.jpg/800px-Exl_logo_rgb_orange_pos.jpg?20211026082830"
+     alt="EXL Logo"
+     width="100"
+     height="70" />
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<div class="login-as-employee">
+    <h5>Login As Employee</h5>
+    @Html.BeginForm("Login", "Home", FormMethod.Post)
+    {
+        <form>
+            <label>Login Id:</label>
+            @Html.TextBoxFor(m => m.userId) <br>
+            <label>Password: </label>
+            @Html.TextBoxFor(m => m.password) <br>
+            <label>Login As</label>
+            @Html.DropDownListFor(m => m.userTypeId, listItems, "-- Select Status --")
+            <input type="submit" />
+        </form>
+    }
+</div>
+
+
+
+
