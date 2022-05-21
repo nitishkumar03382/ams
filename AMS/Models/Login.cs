@@ -11,4 +11,5 @@ namespace AMS.Models
         public string password { get; set; }
         public string userTypeId { get; set; }
     }
+
 }

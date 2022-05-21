@@ -15,7 +15,17 @@ namespace AMS.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            if(Session["userId"] == null)
+                return View();
+            else
+            {
+                if(Convert.ToString(Session["userTypeId"]) == "1")
+                    return RedirectToAction("loginAsEmployee", "Home", new { userId = Convert.ToString(Session["userId"]) });
+                else
+                    return RedirectToAction("loginAsAdmin", "Home", new { userId = Convert.ToString(Session["userId"]) });
+
+            }
+
         }
 
         [HttpPost]
@@ -35,10 +45,12 @@ namespace AMS.Controllers
                 if (user.password == tmpUser.password && user.userTypeId == tmpUser.userTypeId)
                 {
                     TempData["uid"] = user.userId;
+                    Session["userId"] = user.userId;
+                    Session["userTypeId"] = user.userTypeId;
                     if (user.userTypeId == "1")
-                        return RedirectToAction("loginAsEmployee", "Home");
+                        return RedirectToAction("loginAsEmployee", "Home", new { userId = Convert.ToString(Session["userId"]) });
                     else if(user.userTypeId == "0")
-                    return RedirectToAction("loginAsAdmin", "Home");
+                    return RedirectToAction("loginAsAdmin", "Home", new {userId = Convert.ToString(Session["userId"]) });
                 }
             }
             return RedirectToAction("errHndle", "Home");
@@ -49,8 +61,13 @@ namespace AMS.Controllers
             return "ERROR";
         }
 
-        public ActionResult loginAsEmployee()
+        public ActionResult loginAsEmployee(string username)
         {
+            if(Session["userId"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return RedirectToAction("EmployeeHome", "Employee");
         }
 
