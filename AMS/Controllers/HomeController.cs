@@ -50,7 +50,7 @@ namespace AMS.Controllers
                     if (user.userTypeId == "1")
                         return RedirectToAction("loginAsEmployee", "Home", new { userId = Convert.ToString(Session["userId"]) });
                     else if(user.userTypeId == "0")
-                    return RedirectToAction("loginAsAdmin", "Home", new {userId = Convert.ToString(Session["userId"]) });
+                        return RedirectToAction("loginAsAdmin", "Home", new {userId = Convert.ToString(Session["userId"]) });
                 }
             }
             return RedirectToAction("errHndle", "Home");
@@ -71,10 +71,13 @@ namespace AMS.Controllers
             return RedirectToAction("EmployeeHome", "Employee");
         }
 
-        public string loginAsAdmin()
+        public ActionResult loginAsAdmin()
         {
-
-            return "Hello Admin " + Session["uid"];
+            if(Session["userId"] != null)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("Index", "Home");
         }
 
     }

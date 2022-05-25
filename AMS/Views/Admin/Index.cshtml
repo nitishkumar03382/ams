@@ -1,0 +1,82 @@
+﻿@model IEnumerable<AMS.Models.Attendance>
+@*@model IEnumerable<AMS.Models.Attendance>*@
+@{
+    ViewBag.Title = "Admin Page";
+}
+
+
+
+<div class="container">
+    <h2>Admin</h2>
+    <div class="row">
+        @* SIDEBAR NAVIGATION *@
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <input type="button"
+                           value="Employee Attendance"
+                           id="viewAllEmployeeAttendance"
+                           class="btn btn-primary btn-lg m-5 p-5"
+                           onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin")'" />
+                </li>
+                <li class="list-group-item">
+                    <input type="button"
+                           value="Create New User"
+                           id="viewAllEmployeeAttendance"
+                           class="btn btn-primary btn-lg m-5 p-5"
+                           onclick="location.href='@Url.Action("createUser", "Admin")'" />
+                </li>
+            </ul>
+        </div> @* SIDEBAR NAVIGATION END!! *@
+
+        @*All users present day attendance*@
+        <div class="col-md-7">
+            <h3>Today Attendance Report</h3>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Employee_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.loginTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.logoutTime)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.AttendanceStatus)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.loginTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.logoutTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AttendanceStatus)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div> @*All users present day attendance <DIV> END!!*@
+    </div>
+</div>
+
+

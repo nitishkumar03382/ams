@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AMS.Models;
 using DataAccessLayer;
 using System.Configuration;
+using System.Data;
 
 namespace AMS.Controllers
 {
@@ -58,10 +59,52 @@ namespace AMS.Controllers
         }
         public string SendLeaveApplication(Leave l)
         {
-            string leaveReason = l.leave_reason;
-            string leaveStartDate = l.leave_start_date;
-            string numLeaveDays = l.num_leave_days;
-            return "Leave Application: " + leaveReason + "  " + leaveStartDate + "  " + numLeaveDays;
+            if (Session["userId"] != null)
+            {
+                string emp_id = Convert.ToString(Session["userId"]);
+                string leaveReason = l.leave_reason;
+                string leaveStartDate = l.leave_start_date;
+                string numLeaveDays = l.num_leave_days;
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                int AffectedRows = AmsDataAccess.applyLeave(emp_id, leaveStartDate, numLeaveDays, leaveReason );
+                if (AffectedRows == 1)
+                {
+
+                    return "Leave Application: " + leaveReason + "  " + leaveStartDate + "  " + numLeaveDays + ".:SUCCESS:.";
+                }
+                else
+                {
+                    return "ERROR!!!";
+                }
+            }
+            return "UnAuthorized Access!!";
+        }
+
+        public ActionResult viewAtdReport()
+        {
+            if (Session["userId"] != null)
+            {
+                string empId = Convert.ToString(Session["userId"]);
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.GetAttendanceData(empId);
+                List<Attendance> obj = new List<Attendance>();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Attendance d = new Attendance();
+                        d.Employee_id = Convert.ToString(dt.Rows[i]["Employee_id"]);
+                        d.Date = Convert.ToString(dt.Rows[i]["Date"]);
+                        d.loginTime = Convert.ToString(dt.Rows[i]["loginTime"]);
+                        d.logoutTime = Convert.ToString(dt.Rows[i]["logoutTime"]);
+                        d.AttendanceStatus = Convert.ToString(dt.Rows[i]["AttendanceStatus"]);
+                        obj.Add(d);
+
+                    }
+                }
+                return View(obj);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

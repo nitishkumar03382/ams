@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AMS.Models.Attendance>
+
+@{
+    ViewBag.Title = "viewAtdReport";
+}
+
+<h2>viewAtdReport</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loginTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.logoutTime)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.AttendanceStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loginTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.logoutTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttendanceStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

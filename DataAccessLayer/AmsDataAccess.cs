@@ -91,7 +91,7 @@ namespace DataAccessLayer
             using (SqlCommand sqlComm = new SqlCommand("[dbo].[viewAtdReport]", _dbConnection))
             {
                 sqlComm.CommandType = CommandType.StoredProcedure;
-                SqlParameter param1 = new SqlParameter("@Employee_id", empId);
+                SqlParameter param1 = new SqlParameter("@empId", empId);
                 sqlComm.Parameters.Add(param1);
                 using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
                 {
@@ -102,10 +102,25 @@ namespace DataAccessLayer
             return dt;
         }
 
+        // Get attendance of all employees for today
+          public static DataTable getTodayAttendance()
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getTodayAttendance]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
         //Apply for leave
         //empId, leave_apply_date, leave_start_date, num_leave_days, leave_reason, leave_status_id
 
-        public static int applyLeave(string empId, string applyDate, string startDate, string numLeaveDays, string reason)
+        public static int applyLeave(string empId, string startDate, string numLeaveDays, string reason)
         {
             int noOfRowsAffected = -1;
             try
@@ -117,10 +132,7 @@ namespace DataAccessLayer
                     SqlParameter param1 = new SqlParameter("@empId", empId);
                     sqlComm.Parameters.Add(param1);
 
-                    SqlParameter param2 = new SqlParameter("@leave_apply_date", applyDate);
-                    sqlComm.Parameters.Add(param2);
-
-                    SqlParameter param3 = new SqlParameter("@leave_start_date", startDate);
+                    SqlParameter param3 = new SqlParameter("@leaveStartDate", startDate);
                     sqlComm.Parameters.Add(param3);
 
                     SqlParameter param4 = new SqlParameter("@num_leave_days", numLeaveDays);
@@ -142,7 +154,6 @@ namespace DataAccessLayer
             return noOfRowsAffected;
 
         }
-
 
     }
 }
