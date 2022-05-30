@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AMS.Models.Leave>
+
+@{
+    ViewBag.Title = "Leave";
+}
+
+<h2>Leave</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.empId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leave_apply_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leave_start_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num_leave_days)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leave_reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.leave_status_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leave_apply_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leave_start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_leave_days)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leave_reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.leave_status_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

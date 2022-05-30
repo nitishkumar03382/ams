@@ -154,6 +154,61 @@ namespace DataAccessLayer
             return noOfRowsAffected;
 
         }
+        //Attendance report of all employees
+        public static DataTable allEmployeeAttendance(string year, string month)
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getAllEmployeeAttendanceReport]", _dbConnection))
+            {
+                SqlParameter param1 = new SqlParameter("@year", year);
+                sqlComm.Parameters.Add(param1);
+                SqlParameter param2 = new SqlParameter("@month", month);
+                sqlComm.Parameters.Add(param2);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        //number of days and holidays
+        public static DataTable daysAndHolidaysInMonth(string year, string month)
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[dayAndHolidayInMonth]", _dbConnection))
+            {
+                SqlParameter param1 = new SqlParameter("@year", year);
+                sqlComm.Parameters.Add(param1);
+                SqlParameter param2 = new SqlParameter("@month", month);
+                sqlComm.Parameters.Add(param2);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        //Get All Login Data
+        public static DataTable getAllLoginData()
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getAllLoginData]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
 
     }
 }
