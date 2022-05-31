@@ -157,7 +157,10 @@ namespace AMS.Controllers
             return RedirectToAction("Index", "Home");
         }
         // TODO: Details of a user
-
+        public ActionResult empDetails()
+        {
+            return View();
+        }
 
         //Manage Leave
         public ActionResult Leave()
@@ -255,7 +258,6 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
         public string message(string msg)
         {
             return msg;

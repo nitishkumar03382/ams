@@ -145,6 +145,7 @@
     <Content Include="Views\Admin\Leave.cshtml" />
     <Content Include="Views\Admin\AllTimeLeave.cshtml" />
     <Content Include="Views\Home\messageHandler.cshtml" />
+    <Content Include="Views\Admin\empDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
