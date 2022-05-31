@@ -156,7 +156,7 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        // Details of a user
+        // TODO: Details of a user
 
 
         //Manage Leave
@@ -164,10 +164,103 @@ namespace AMS.Controllers
         {
             if(Session["userId"] != null)
             {
-                return View();
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.getLast30DayPendingLeave();
+
+                List<Leave> obj = new List<Leave>();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Leave d = new Leave();
+                        d.leaveId = Convert.ToString(dt.Rows[i]["leaveId"]);
+                        d.empId = Convert.ToString(dt.Rows[i]["empId"]);
+                        d.leave_apply_date = Convert.ToString(dt.Rows[i]["leave_apply_date"]);
+                        d.leave_start_date = Convert.ToString(dt.Rows[i]["leave_start_date"]);
+                        d.num_leave_days = Convert.ToString(dt.Rows[i]["num_leave_days"]);
+                        d.leave_reason = Convert.ToString(dt.Rows[i]["leave_reason"]);
+                        obj.Add(d);
+                    }
+                }
+                return View(obj);
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult AllTimeLeave()
+        {
+            if(Session["userId"] != null)
+            {
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.getAllLeave();
+
+                List<Leave> obj = new List<Leave>();
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Leave d = new Leave();
+                        d.leaveId = Convert.ToString(dt.Rows[i]["leaveId"]);
+                        d.empId = Convert.ToString(dt.Rows[i]["empId"]);
+                        d.leave_apply_date = Convert.ToString(dt.Rows[i]["leave_apply_date"]);
+                        d.leave_start_date = Convert.ToString(dt.Rows[i]["leave_start_date"]);
+                        d.num_leave_days = Convert.ToString(dt.Rows[i]["num_leave_days"]);
+                        d.leave_reason = Convert.ToString(dt.Rows[i]["leave_reason"]);
+                        d.leave_status = Convert.ToString(dt.Rows[i]["leave_status"]);
+                        obj.Add(d);
+                    }
+                }
+                return View(obj);
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        //Approve Leave
+        public ActionResult LeaveApprove(string leaveId, string empId)
+        {
+            if(Session["userId"] != null)
+            {
+                int leaveStatus = 1; //1 is for approval
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                int AffectedRows = AmsDataAccess.manageLeave(leaveId, leaveStatus, empId);
+                if(AffectedRows >= 1)
+                {
+                    return RedirectToAction("message", "Admin", new { msg = "Leave Approved for" + empId + "."});
+                }
+                else
+                {
+                    return RedirectToAction("message", "Admin", new {msg = "ERROR!"});
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        //Reject Leave
+        public ActionResult LeaveReject(string leaveId, string empId)
+        {
+            if (Session["userId"] != null)
+            {
+                int leaveStatus = 2; //2 is for rejection of leave
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                int AffectedRows = AmsDataAccess.manageLeave(leaveId, leaveStatus, empId);
+                if (AffectedRows >= 1)
+                {
+                    return RedirectToAction("message", "Admin", new { msg = "Leave Rejected! for" + empId + "." });
+                }
+                else
+                {
+                    return RedirectToAction("message", "Admin", new { msg = "ERROR!" });
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public string message(string msg)
+        {
+            return msg;
+        }
+
 
     }
 }

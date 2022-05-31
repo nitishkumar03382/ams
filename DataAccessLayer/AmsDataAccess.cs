@@ -210,5 +210,68 @@ namespace DataAccessLayer
             return dt;
         }
 
+        //Get Pending Leave Data of last 30 days
+        public static DataTable getLast30DayPendingLeave()
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getLast30DayPendingLeave]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+        //Get all leave data
+        public static DataTable getAllLeave()
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getAllLeave]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        public static int manageLeave(string leaveId, int leaveStatus, string empId)
+        {
+            int noOfRowsAffected = -1;
+            try
+            {
+                _dbConnection.Open();
+                using (SqlCommand sqlComm = new SqlCommand("[dbo].[manageLeave]", _dbConnection))
+                {
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@leaveId", leaveId);
+                    sqlComm.Parameters.Add(param1);
+
+                    SqlParameter param2 = new SqlParameter("@leaveStatus",leaveStatus);
+                    sqlComm.Parameters.Add(param2);
+
+                    SqlParameter param3 = new SqlParameter("@empId", empId);
+                    sqlComm.Parameters.Add(param3);
+
+                    noOfRowsAffected = sqlComm.ExecuteNonQuery();
+
+                }
+                _dbConnection.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return noOfRowsAffected;
+
+        }
+
     }
 }

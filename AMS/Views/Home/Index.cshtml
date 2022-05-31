@@ -1,4 +1,5 @@
-﻿@using AMS.Models
+﻿
+@using AMS.Models
 @model Login
 @{
     List<SelectListItem> listItems = new List<SelectListItem>();
@@ -19,33 +20,33 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>EXL Services Attendance Portal</h2>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Exl_logo_rgb_orange_pos.jpg/800px-Exl_logo_rgb_orange_pos.jpg?20211026082830"
-     alt="EXL Logo"
-     width="100"
-     height="70" />
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<div class="login">
-    <h5>Login</h5>
-    @Html.BeginForm("Login", "Home", FormMethod.Post)
-    {
+<div class="loginPage">
+    <h2><span style="color:red; font-weight:200;">EXL </span>Services Attendance Portal</h2>
+    <div class="login">
+        <h3>Login</h3>
+        @using(Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+        @Html.Hidden("returnUrl", Request.Url.ToString())
+       
+        <br />
         <form>
-            <label>Login Id:</label>
-            @Html.TextBoxFor(m => m.userId) <br>
-            <label>Password: </label>
-            @Html.TextBoxFor(m => m.password) <br>
-            <label>Login As</label>
-            @Html.DropDownListFor(m => m.userTypeId, listItems, "-- Select Status --")
+            <label>
+                Login Id:
+                @Html.TextBoxFor(m => m.userId)
+            </label><br>
+            <label>
+                Password:
+                @Html.TextBoxFor(m => m.password)
+            </label> <br>
+            <label>
+                Login As
+                @Html.DropDownListFor(m => m.userTypeId, listItems, "-- Select Status --")
+            </label>
+            <br />
             <input type="submit" />
         </form>
-    }
+        }
+    </div>
 </div>
 
 

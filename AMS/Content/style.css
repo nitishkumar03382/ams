@@ -1,0 +1,63 @@
+﻿
+
+/* Set width on the form input elements since they're 100% wide by default */
+html,body{
+   height: 100%;
+}
+.loginPage{
+    margin: 0 auto;
+    width: 50%;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  
+}
+.loginPage form{
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #e85a0e;
+    color: white;
+    font-size: 1.5em;
+    box-shadow: 5px 5px 3px #be7751;
+    border-radius: 5px;
+   
+}
+.loginPage label{
+    padding: 10px;
+}
+.loginPage h3{
+    font-size: 32px;
+    font-weight: bolder;
+}
+.msg{
+    height: 90vh;
+     display:flex;
+    justify-content:center;
+    align-items:center;
+   margin: 0 auto;
+}
+.msg .error{
+    padding: 20px;
+    background-color: rgb(255,0,0);
+    color:white;
+    font-weight:bolder;
+}
+.msg .warning{
+    padding: 20px;
+    background-color: greenyellow;
+    color:white;
+    font-weight:bolder;
+}
+.msg .success{
+    padding: 20px;
+    background-color:green;
+    color:white;
+    font-weight:bolder;
+}
+@media (max-width: 600px){
+    .loginPage{
+        width:100%;
+    }
+}
+
+

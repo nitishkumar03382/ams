@@ -53,12 +53,14 @@ namespace AMS.Controllers
                         return RedirectToAction("loginAsAdmin", "Home", new {userId = Convert.ToString(Session["userId"]) });
                 }
             }
-            return RedirectToAction("errHndle", "Home");
+            return RedirectToAction("messageHandler", "Home", new { msg = "Invalid Credentials", msgType="error"});
         }
 
-        public string errHndle()
+        public ActionResult messageHandler(string msg, string msgType)
         {
-            return "ERROR";
+            ViewBag.message = msg;
+            ViewBag.messageType = msgType;
+            return View();
         }
 
         public ActionResult loginAsEmployee(string username)

@@ -21,7 +21,7 @@ namespace AMS.Controllers
                 return RedirectToAction("Index", "Home");
 
         }
-        public string AttendanceLogin()
+        public ActionResult AttendanceLogin()
         {
             if (Session["userId"] != null)
             {
@@ -29,13 +29,13 @@ namespace AMS.Controllers
                 AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
                 int AffectedRows = AmsDataAccess.attendanceLogin(emp_Id);
                 if (AffectedRows == 1)
-                    return "Login Done";
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Logged In.", msgType = "success" });
                 else
-                    return "Login Can`t done today";
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Already Logged in.", msgType = "warning" });
             }
-            return "ERROR";
+            return RedirectToAction("messageHandler", "Home", new { msg = "ERROR.", msgType = "error" });
         }
-        public string AttendanceLogout()
+        public ActionResult AttendanceLogout()
         {
             if (Session["userId"] != null)
             {
@@ -43,10 +43,10 @@ namespace AMS.Controllers
                 AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
                 int AffectedRows = AmsDataAccess.attendanceLogout(emp_Id);
                 if (AffectedRows == 1)
-                    return "Logout Done";
-                return "Can`t logout";
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Logged Out Done.", msgType = "success" });
+                return RedirectToAction("messageHandler", "Home", new { msg = "Can`t do Logout.", msgType = "warning" });
             }
-            return "ERROR!!!";
+            return RedirectToAction("messageHandler", "Home", new { msg = "ERROR.", msgType = "error" });
         }
         public ActionResult LeaveApply(string empId)
         {
@@ -57,7 +57,7 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        public string SendLeaveApplication(Leave l)
+        public ActionResult SendLeaveApplication(Leave l)
         {
             if (Session["userId"] != null)
             {
@@ -70,14 +70,14 @@ namespace AMS.Controllers
                 if (AffectedRows == 1)
                 {
 
-                    return "Leave Application: " + leaveReason + "  " + leaveStartDate + "  " + numLeaveDays + ".:SUCCESS:.";
+                    return RedirectToAction("messageHandler", "Home", new { msg = "SUCCESS.", msgType="success"});
                 }
                 else
                 {
-                    return "ERROR!!!";
+                    return RedirectToAction("messageHandler", "Home", new { msg = "ERROR.", msgType = "error" });
                 }
             }
-            return "UnAuthorized Access!!";
+            return RedirectToAction("messageHandler", "Home", new { msg = "UnAuthorized Access.", msgType = "error" });
         }
 
         public ActionResult viewAtdReport()
@@ -106,5 +106,6 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

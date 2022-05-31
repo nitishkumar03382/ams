@@ -1,26 +1,14 @@
 ﻿@model IEnumerable<AMS.Models.Leave>
 
 @{
-    ViewBag.Title = "Leave";
+    ViewBag.Title = "AllTimeLeave";
 }
 
+<h2>AllTimeLeave</h2>
 
-<input type="button"
-       value="Last 30 Days Leave"
-       id="viewLast30DaysEmployeeLeave"
-       class="btn btn-primary btn-lg m-5 p-5"
-       style=""
-       onclick="location.href='@Url.Action("Leave", "Admin")'" />
-    
-
-<input type="button"
-           value="All Time Leave"
-           id="viewAllTimeEmployeeLeave"
-           class="btn btn-primary btn-lg m-5 p-5"
-           style=""
-           onclick="location.href='@Url.Action("AllTimeLeave", "Admin")'" />
-  
-<h2>Pending Leaves</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -38,13 +26,10 @@
         <th>
             @Html.DisplayNameFor(model => model.leave_reason)
         </th>
-      
         <th>
-            Approve
+            @Html.DisplayNameFor(model => model.leave_status)
         </th>
-        <th>
-            Reject
-        </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -65,10 +50,7 @@
             @Html.DisplayFor(modelItem => item.leave_reason)
         </td>
         <td>
-                @Html.ActionLink("Approve", "leaveApprove", new {leaveId = item.leaveId ,empId = item.empId})
-        </td>
-        <td>
-            @Html.ActionLink("Reject", "leaveReject", new { leaveId = item.leaveId, empId = item.empId })
+            @Html.DisplayFor(modelItem => item.leave_status)
         </td>
     </tr>
 }
