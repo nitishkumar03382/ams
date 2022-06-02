@@ -67,11 +67,12 @@ html,body{
 
 
 .sidebar{
+    padding: 5px;
     background-color: red;
     display:flex;
     flex-direction:row;
     justify-content:center;
-
+    align-items:center;
     margin-bottom: 50px; 
     width: 100%;
 }
@@ -84,14 +85,19 @@ html,body{
     background-color:gray;
     margin: 3px;
 }
-a:hover{
-    color:white;
-    background-color:#6d6d6d;
-    margin: 3px;
-}
-.atd-table{
-    width: 80%;
 
+.atd-table{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin: 0 auto;
+    width: 80%;
+    border: 1px solid red;
+}
+.atd-table input{
+    margin: 5px auto;
+    text-align:center;
 }
 @media (max-width: 600px){
     .loginPage{

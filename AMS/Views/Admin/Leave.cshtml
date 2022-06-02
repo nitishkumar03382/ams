@@ -2,75 +2,109 @@
 
 @{
     ViewBag.Title = "Leave";
+    string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+    DateTime dt = DateTime.Today;
+    int month = dt.Month;
+    int year = dt.Year;
 }
+<div class="main">
+    @* Navbar *@
+    <ul class="sidebar">
+        <li class="list">
+            <input type="button"
+                   value="Admin"
+                   id="viewAllEmployeeAttendance"
+                   style="background-color:white; color: red; text-align:left;"
+                   class="btn btn-link btn-lg m-5 p-5"
+                   onclick="location.href='@Url.Action("Index", "Admin")'" />
+        </li>
+        <li class="list">
+            <input type="button"
+                   value="Monthly Attendance Report"
+                   id="viewAllEmployeeAttendance"
+                   class="btn btn-link btn-lg m-5 p-5"
+                   onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin", new {y = year, m = month})'" />
+        </li>
+
+        <li class="list">
+            <input type="button"
+                   value="Employee Info"
+                   id="viewAllEmployeeAttendance"
+                   class="btn btn-link btn-lg m-5 p-5"
+                   onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
+        </li>
+        <li class="list">
+            <input type="button"
+                   value="Manage Employee Leave"
+                   id="viewAllEmployeeLeave"
+                   class="btn btn-link btn-lg m-5 p-5"
+                   onclick="location.href='@Url.Action("Leave", "Admin")'" />
+        </li>
+    </ul>
+    @* SIDEBAR NAVIGATION END!! *@
 
 
-<input type="button"
-       value="Last 30 Days Leave"
-       id="viewLast30DaysEmployeeLeave"
-       class="btn btn-primary btn-lg m-5 p-5"
-       style=""
-       onclick="location.href='@Url.Action("Leave", "Admin")'" />
-    
+    <div class="atd-table">
+        <h2>Pending Leaves</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.empId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leave_apply_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leave_start_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.num_leave_days)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leave_reason)
+                </th>
 
-<input type="button"
-           value="All Time Leave"
-           id="viewAllTimeEmployeeLeave"
-           class="btn btn-primary btn-lg m-5 p-5"
-           style=""
-           onclick="location.href='@Url.Action("AllTimeLeave", "Admin")'" />
-  
-<h2>Pending Leaves</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.empId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.leave_apply_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.leave_start_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.num_leave_days)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.leave_reason)
-        </th>
-      
-        <th>
-            Approve
-        </th>
-        <th>
-            Reject
-        </th>
-    </tr>
+                <th>
+                    Approve
+                </th>
+                <th>
+                    Reject
+                </th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.empId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.leave_apply_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.leave_start_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.num_leave_days)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.leave_reason)
-        </td>
-        <td>
-                @Html.ActionLink("Approve", "leaveApprove", new {leaveId = item.leaveId ,empId = item.empId})
-        </td>
-        <td>
-            @Html.ActionLink("Reject", "leaveReject", new { leaveId = item.leaveId, empId = item.empId })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.empId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.leave_apply_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.leave_start_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.num_leave_days)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.leave_reason)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Approve", "leaveApprove", new { leaveId = item.leaveId, empId = item.empId })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Reject", "leaveReject", new { leaveId = item.leaveId, empId = item.empId })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+        <input type="button"
+               value="All Time Leave"
+               id="viewAllTimeEmployeeLeave"
+               class="btn btn-primary btn-lg m-5 p-5"
+               style=""
+               onclick="location.href='@Url.Action("AllTimeLeave", "Admin")'" />
+    </div>
+</div>
