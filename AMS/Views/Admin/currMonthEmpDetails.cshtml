@@ -122,15 +122,25 @@
                class="btn btn-link btn-lg m-5 p-5"
                onclick="location.href='@Url.Action("Leave", "Admin")'" />
     </li>
+    <li class="list">
+        <input type="button"
+               value="Log Out!"
+               id="viewAllEmployeeLeave"
+               style="background-color:#170e0e; color:white"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("logout", "Admin")'" />
+    </li>
 </ul>
 @* SIDEBAR NAVIGATION END!! *@
 <center>
+    <h1>@ViewBag.name (@ViewBag.empId)</h1>
     <h3 class="text-center">@mArr[@month - 1] - @year Report</h3>
-    <hr width="60%" />
+    <hr />
     <input type="button"
            class="btn btn-primary"
            value="Filter By Year and Month"
            onclick="location.href='@Url.Action("filterDashBoard", "Admin", new { empId = ViewBag.empId})'" />
+    <hr width="60%" />
 </center>
 
 <center>

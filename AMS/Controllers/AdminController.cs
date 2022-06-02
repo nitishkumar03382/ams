@@ -400,7 +400,11 @@ namespace AMS.Controllers
         {
             return msg;
         }
-
+        public ActionResult logout()
+        {
+            Session["userId"] = null;
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
