@@ -15,66 +15,67 @@
 
 
 @*//attendance section for employee ==============================*@
-
+<div class="main">
 
     <div class="markAttd">
         <h2 class="text-center">Mark Your Attendance</h2>
-                <div class="btn-container">
-                    
-                    <div>
-                        <input type="button"
-                               value="Attendance Login"
-                               id="btnLogin"
-                               style=""
-                               class="btn btn-success"
-                               onclick="location.href='@Url.Action("AttendanceLogin", "Employee")'" />
-                    </div>
-                    <div>
-                        <input type="button"
-                               value="Attendance Logout"
-                               id="btnLogout"
-                               style=""
-                               class="btn btn-primary"
-                               onclick="location.href='@Url.Action("AttendanceLogout", "Employee")'" />
-                    </div>
-                </div>
+        <div class="btn-container">
+
+            <div>
+                <input type="button"
+                       value="Attendance Login"
+                       id="btnLogin"
+                       style=""
+                       class="btn btn-success"
+                       onclick="location.href='@Url.Action("AttendanceLogin", "Employee")'" />
+            </div>
+            <div>
+                <input type="button"
+                       value="Attendance Logout"
+                       id="btnLogout"
+                       style=""
+                       class="btn btn-primary"
+                       onclick="location.href='@Url.Action("AttendanceLogout", "Employee")'" />
+            </div>
+        </div>
 
 
     </div>
 
 
 
-<div class="container">
-    <div class="row">
-        @*// Leave ============================================*@
-        <div class="col-5 report-sec1">
-            <div class="container bg-secondary text-white">
-                <h2>Apply For Leave</h2>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type="button"
-                                   value="Apply for leave"
-                                   id="leaveApplybtn"
-                                   class="btn btn-primary btn-lg m-5 p-5"
-                                   onclick="location.href='@Url.Action("LeaveApply", "Employee")'" />
+    <div class="container">
+        <div class="row homeLeaveAttd">
+            @*// Leave ============================================*@
+            <div class="report-sec1">
+                <div class="container bg-secondary text-white">
+                    <h2>Apply For Leave</h2>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div>
+                                <input type="button"
+                                       value="Apply for leave"
+                                       id="leaveApplybtn"
+                                       class="btn btn-primary btn-lg m-5 p-5"
+                                       onclick="location.href='@Url.Action("LeaveApply", "Employee")'" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @*Apply for leave section is here===================================*@
-        <div class="col-5 report-sec2">
-            <div class="container bg-secondary text-white">
-                <h2>View Attendance Report</h2>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type="button"
-                                   value="Attendance Report"
-                                   id="viewAtdReport"
-                                   class="btn btn-primary btn-lg m-5 p-5"
-                                   onclick="location.href='@Url.Action("viewAtdReport", "Employee")'" />
+            @*Apply for leave section is here===================================*@
+            <div class=" report-sec2">
+                <div class="container bg-secondary text-white">
+                    <h2>View Attendance Report</h2>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div>
+                                <input type="button"
+                                       value="Attendance Report"
+                                       id="viewAtdReport"
+                                       class="btn btn-primary btn-lg m-5 p-5"
+                                       onclick="location.href='@Url.Action("viewAtdReport", "Employee")'" />
+                            </div>
                         </div>
                     </div>
                 </div>
