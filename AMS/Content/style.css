@@ -99,6 +99,12 @@ html,body{
     margin: 5px auto;
     text-align:center;
 }
+.link-dashboard{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin: 5px auto;
+}
 @media (max-width: 600px){
     .loginPage{
         width:100%;

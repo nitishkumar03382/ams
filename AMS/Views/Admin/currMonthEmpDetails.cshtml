@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "currMonthEmpDetails";
     DateTime dt = DateTime.Today;
-    int year = dt.Year;
-    int month = dt.Month;
+    int year = Convert.ToInt32(ViewBag.year);
+    int month = Convert.ToInt32(ViewBag.month);
     string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 }
 
@@ -90,18 +90,49 @@
         background-color: aliceblue;
     }
 </style>
+@* Navbar *@
+<ul class="sidebar">
+    <li class="list">
+        <input type="button"
+               value="Admin"
+               id="viewAllEmployeeAttendance"
+               style="background-color:white; color: red; text-align:left;"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("Index", "Admin")'" />
+    </li>
+    <li class="list">
+        <input type="button"
+               value="Monthly Attendance Report"
+               id="viewAllEmployeeAttendance"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin", new {y = year, m = month})'" />
+    </li>
 
+    <li class="list">
+        <input type="button"
+               value="Employee Info"
+               id="viewAllEmployeeAttendance"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
+    </li>
+    <li class="list">
+        <input type="button"
+               value="Manage Employee Leave"
+               id="viewAllEmployeeLeave"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("Leave", "Admin")'" />
+    </li>
+</ul>
+@* SIDEBAR NAVIGATION END!! *@
 <center>
-    <h1 style="font-size:60px; margin-bottom: 8px; margin-top: 0; font-family:arial; text-align:center; background-color: beige;">
-        Employee Dashboard
-    </h1>
-    <h3 class="text-center">@mArr[@month - 1] - @year</h3>
+    <h3 class="text-center">@mArr[@month - 1] - @year Report</h3>
+    <hr width="60%" />
+    <input type="button"
+           class="btn btn-primary"
+           value="Filter By Year and Month"
+           onclick="location.href='@Url.Action("filterDashBoard", "Admin", new { empId = ViewBag.empId})'" />
 </center>
-<br>
-<br>
-<hr>
-<br>
-<br>
+
 <center>
     <table>
         <tr>
@@ -124,69 +155,77 @@
 <div class="main">
 
     <!--cards -->
-    
-    <div class="card">
-        <div class="image">
-            <img src="~/Content/img1.jpg">
+    <div class="atd-dashboard">
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img1.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Working Hours
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.workHour Hours @ViewBag.workMin minutes</p>
+            </div>
         </div>
-        <div class="title">
-            <h1>
-                Working Hours
-            </h1>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img2.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Present
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.present Days</p>
+            </div>
         </div>
-        <div class="des">
-            <p>@ViewBag.workHour Hours @ViewBag.workMin minutes</p>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img3.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Absent
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.absent Days</p>
+            </div>
+        </div>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img4.jpg">
+            </div>
+
+            <div class="title">
+                <h1>
+                    Leaves Taken
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.leave Days</p>
+            </div>
+        </div>
+        <!--cards -->
+    </div>
+    <div class="link-dashboard">
+        <div>
+            @Html.ActionLink("More", "empDetails", new { empId = ViewBag.empId })
+        </div>
+        <div>
+
         </div>
     </div>
-    <!--cards -->
-
-
-    <div class="card">
-        <div class="image">
-            <img src="~/Content/img2.jpg">
-        </div>
-        <div class="title">
-            <h1>
-                Present
-            </h1>
-        </div>
-        <div class="des">
-            <p>@ViewBag.present Days</p>
-        </div>
-    </div>
-    <!--cards -->
-
-
-    <div class="card">
-        <div class="image">
-            <img src="~/Content/img3.jpg">
-        </div>
-        <div class="title">
-            <h1>
-                Absent
-            </h1>
-        </div>
-        <div class="des">
-            <p>@ViewBag.absent Days</p>
-        </div>
-    </div>
-    <!--cards -->
-
-
-    <div class="card">
-        <div class="image">
-            <img src="~/Content/img4.jpg">
-        </div>
-      
-        <div class="title">
-            <h1>
-                Leaves Taken
-            </h1>
-        </div>
-        <div class="des">
-            <p>@ViewBag.leave Days</p>
-        </div>
-    </div>
-    <!--cards -->
 </div>
-@Html.ActionLink("More", "empDetails", new { empId = ViewBag.empId })

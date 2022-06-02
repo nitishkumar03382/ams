@@ -160,6 +160,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\filterByYearMonth.cshtml" />
     <Content Include="Views\Employee\filterYearMonth.cshtml" />
+    <Content Include="Views\Admin\filterDashBoard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

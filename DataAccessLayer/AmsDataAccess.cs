@@ -311,7 +311,7 @@ namespace DataAccessLayer
             return dt;
         }
         //Current month a employee details
-        public static DataTable getCurrMonthEmpDetail(string empId)
+        public static DataTable getCurrMonthEmpDetail(string empId, string year, string month)
         {
             DataTable dt = null;
             using (SqlCommand sqlComm = new SqlCommand("[dbo].[getCurrMonthEmployeeData]", _dbConnection))
@@ -319,6 +319,12 @@ namespace DataAccessLayer
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 SqlParameter param1 = new SqlParameter("@empId", empId);
                 sqlComm.Parameters.Add(param1);
+
+                SqlParameter param2 = new SqlParameter("@year", Convert.ToInt32(year));
+                sqlComm.Parameters.Add(param2);
+
+                SqlParameter param3 = new SqlParameter("@month", Convert.ToInt32(month));
+                sqlComm.Parameters.Add(param3);
                 using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
                 {
                     dt = new DataTable();

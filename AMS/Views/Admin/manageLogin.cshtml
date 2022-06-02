@@ -74,7 +74,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.userId }) |
-                        @Html.ActionLink("Details", "currMonthEmpDetails", new { empId = item.userId }) |
+                        @Html.ActionLink("Details", "currMonthEmpDetails", new { empId = item.userId, y = year, m = month }) |
                         @Html.ActionLink("Delete", "DeleteUser", new { id = item.userId })
                     </td>
                 </tr>

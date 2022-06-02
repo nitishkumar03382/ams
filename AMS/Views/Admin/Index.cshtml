@@ -74,7 +74,7 @@
             {
                 <tr>
                     <td>
-                        <a href="@Url.Action("currMonthEmpDetails", "Admin", new { empId = item.Employee_id})">@item.Employee_id</a>
+                        <a href="@Url.Action("currMonthEmpDetails", "Admin", new { empId = item.Employee_id, y = year, m = month})">@item.Employee_id</a>
                     </td>
 
                     <td>

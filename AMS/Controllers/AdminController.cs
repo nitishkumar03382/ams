@@ -107,6 +107,7 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
         public ActionResult filterByYearMonth()
         {
             if(Session["userId"] != null)
@@ -115,6 +116,7 @@ namespace AMS.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
         //Show All Data
         public ActionResult manageLogin()
         {
@@ -247,17 +249,19 @@ namespace AMS.Controllers
             return RedirectToAction("Index", "Home");
         }
         //Current month details of a user
-        public ActionResult currMonthEmpDetails(string empId)
+        public ActionResult currMonthEmpDetails(string empId, int y, int m)
         {
 
             if (Session["userId"] != null)
             {
                 string year, month;
-                DateTime dte = DateTime.Today;
-                year = dte.Year.ToString();
-                month = dte.Month.ToString();
+                
+                year = y.ToString();
+                month = m.ToString();
+                ViewBag.year = year;
+                ViewBag.month = month;
                 AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
-                DataTable dt = AmsDataAccess.getCurrMonthEmpDetail(empId);
+                DataTable dt = AmsDataAccess.getCurrMonthEmpDetail(empId,year,month);
                 DataTable dt2 = AmsDataAccess.daysAndHolidaysInMonth(year, month);
                 int days = Convert.ToInt32(dt2.Rows[0]["days"]);
                 int weekends = Convert.ToInt32(dt2.Rows[0]["weekends"]);
@@ -275,6 +279,25 @@ namespace AMS.Controllers
                 return View();
             }
 
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult filterDashBoard(int y, int m)
+        {
+            if (Session["userId"] != null)
+            {
+                string empId = Session["empId"].ToString();
+                return RedirectToAction("currMonthEmpDetails", "Admin", new { empId = empId, y = y, m = m });
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult filterDashBoard(string empId)
+        {
+            if (Session["userId"] != null)
+            {
+                Session["empId"] = empId;
+                return View();
+            }
             return RedirectToAction("Index", "Home");
         }
         //Manage Leave
