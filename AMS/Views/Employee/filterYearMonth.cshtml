@@ -1,0 +1,10 @@
+﻿<div style="display:flex; justify-content:center; align-items:center;">
+    <div style="justify-content:center; align-items:center;">
+        @using (Html.BeginForm("filterYearMonth", "Employee", FormMethod.Post))
+        {
+            <input type="number" name="y" id="y" placeholder="Year" required style="width: 300px; padding: 15px; margin: 10px;" min="2020" max="2050" /><br />
+            <input type="number" name="m" id="m" placeholder="Month" required style="width: 300px; padding: 15px; margin: 10px;" min="1" max="12" /><br />
+            <input class="btn btn-primary" type="submit" value="Filter" style="width: 300px; padding: 15px; margin: 10px;" />
+        }
+    </div>
+</div>

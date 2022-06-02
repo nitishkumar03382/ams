@@ -37,7 +37,7 @@ namespace AMS.Controllers
                 if (AffectedRows == 1)
                     return RedirectToAction("messageHandler", "Home", new { msg = "Logged In.", msgType = "success" });
                 else
-                    return RedirectToAction("messageHandler", "Home", new { msg = "Already Logged in.", msgType = "warning" });
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Already Logged in or You may be on leave...", msgType = "warning" });
             }
             return RedirectToAction("messageHandler", "Home", new { msg = "ERROR.", msgType = "error" });
         }
@@ -86,13 +86,15 @@ namespace AMS.Controllers
             return RedirectToAction("messageHandler", "Home", new { msg = "UnAuthorized Access.", msgType = "error" });
         }
 
-        public ActionResult viewAtdReport()
+        public ActionResult viewAtdReport(int y, int m)
         {
             if (Session["userId"] != null)
             {
+                ViewBag.year = y;
+                ViewBag.month = m;
                 string empId = Convert.ToString(Session["userId"]);
                 AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
-                DataTable dt = AmsDataAccess.GetAttendanceData(empId);
+                DataTable dt = AmsDataAccess.GetAttendanceData(empId, y, m);
                 List<Attendance> obj = new List<Attendance>();
                 if (dt.Rows.Count > 0)
                 {
@@ -110,6 +112,22 @@ namespace AMS.Controllers
                 }
                 return View(obj);
             }
+            
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult filterYearMonth(int y, int m)
+        {
+            if (Session["userId"] != null)
+            {
+                return RedirectToAction("viewAtdReport", "Employee", new { y = y, m = m });
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult filterYearMonth()
+        {
+            if(Session["userId"]!=null)
+                return View();
             return RedirectToAction("Index", "Home");
         }
 

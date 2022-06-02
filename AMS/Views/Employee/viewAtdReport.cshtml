@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "viewAtdReport";
     DateTime dte = DateTime.Today;
-    string year = dte.Year.ToString();
-    int month = dte.Month;
+    string year = ViewBag.year.ToString();
+    int month = Convert.ToInt32(ViewBag.month);
     string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 }
 
-<h2 class="text-center">Your @mArr[@month-1] Attendance Report</h2>
+<h2 class="text-center">Your @mArr[@month-1] - @year Attendance Report</h2>
 
 
 <table class="table">
@@ -52,5 +52,11 @@
 
     </tr>
 }
-
+    
 </table>
+<input type="button"
+       value="Filter by year and month"
+       id="btnLogout"
+       style=""
+       class="btn btn-primary"
+       onclick="location.href='@Url.Action("filterYearMonth", "Employee")'" />
