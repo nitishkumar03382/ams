@@ -38,28 +38,23 @@ namespace AMS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult viewAllEmployeeAttendance(string s)
+        public ActionResult viewAllEmployeeAttendance(int y, int m)
         {
             if (Session["userId"] != null)
             {
-                string year="2022", month="05";
-                if(s == null)
-                {
-                    DateTime dte = DateTime.Today;
-                     year = dte.Year.ToString();
-                     month = dte.Month.ToString();
-                }
-                else
-                {
-                    s = "DONE";
-                    
-                }
+                string year = Convert.ToString(y);
+                string month = Convert.ToString(m);
+                ViewBag.year = y;
+                ViewBag.month = m;
                 AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
                 DataTable dt = AmsDataAccess.allEmployeeAttendance(year, month);
                 DataTable dt2 = AmsDataAccess.daysAndHolidaysInMonth(year, month);
+
                 int daysInMonth = Convert.ToInt32(dt2.Rows[0]["days"]);
                 int HolidaysInMonth = Convert.ToInt32(dt2.Rows[0]["weekends"]);
+
                 List<AttendanceReport> obj = new List<AttendanceReport>();
+
                 if (dt.Rows.Count > 0)
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -85,11 +80,19 @@ namespace AMS.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public ActionResult filterByYearMonth(AttendanceReport arp)
+        public ActionResult filterByYearMonth(int y, int m)
+        {
+            if (Session["userId"] != null)
+            {
+                return RedirectToAction("viewAllEmployeeAttendance", "Admin", new { y = y, m = m });
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult filterByYearMonth()
         {
             if(Session["userId"] != null)
             {
-                RedirectToAction("viewAllEmployeeAttendance", "Admin");
+                return View();
             }
             return RedirectToAction("Index", "Home");
         }
@@ -131,10 +134,20 @@ namespace AMS.Controllers
         [HttpPost]
         public ActionResult Create(Login user)
         {
-            if(Session["userId"] != null)
+            if (Session["userId"] != null)
             {
+                int dt = AmsDataAccess.CreateUser(user.userId, user.password, user.userTypeId);
+                if (dt > 0)
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Record Added Succesfully", msgType = "success"});
+                }
+                else
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Can`t add this record!. It might exist aready.", msgType = "warning" });
 
+                }
             }
+
             return RedirectToAction("Index", "Home");
         }
         //Edit User Login info
@@ -142,26 +155,109 @@ namespace AMS.Controllers
         {
             if(Session["userId"] != null)
             {
+                ViewBag.userId = id;
                 Login l = new Login();
                 return View(l);
             }
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-        public ActionResult Edit(Login user)
+        public ActionResult Edit(Login user, string id)
+        {
+
+            if (Session["userId"] != null)
+            {
+                user.userId = id;
+                int dt = AmsDataAccess.EditUser(user.userId, user.password, user.userTypeId);
+                if (dt > 0)
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Record Updated Succesfully", msgType = "success" });
+                }
+                else
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Something wrong happened!!", msgType = "error" });
+                }
+            }
+            
+            return RedirectToAction("Index","Home");
+        }
+
+        //DELETE
+        // Delete user
+        public ActionResult DeleteUser(string id)
         {
             if (Session["userId"] != null)
             {
-               
+                int dt = AmsDataAccess.DeleteUser(id);
+                if (dt > 0)
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Record Deleted Successfully", msgType = "success" });
+                }
+                else
+                {
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Something wrong happened!!", msgType = "error" });
+                }
             }
             return RedirectToAction("Index", "Home");
         }
-        // TODO: Details of a user
-        public ActionResult empDetails()
+        // Details of a user
+        public ActionResult empDetails(string empId)
         {
-            return View();
-        }
+            if (Session["userId"] != null)
+            {
+                string year, month;
+                DateTime dte = DateTime.Today;
+                year = dte.Year.ToString();
+                month = dte.Month.ToString();
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.getEmpDetail(empId);
+                DataTable dt2 = AmsDataAccess.daysAndHolidaysFromCurrDate(empId);
+                int days = Convert.ToInt32(dt2.Rows[0]["TotalDays"]);
+                int weekends = Convert.ToInt32(dt2.Rows[0]["Holidays"]);
+                ViewBag.empId = empId;
+                ViewBag.workHour = Convert.ToInt32(dt.Rows[0]["workDuration"]) / 60;
+                ViewBag.workMin = Convert.ToInt32(dt.Rows[0]["workDuration"]) % 60;
+                ViewBag.name = dt.Rows[0]["name"];
+                ViewBag.supervisorId = dt.Rows[0]["supervisorId"];
+                ViewBag.present = dt.Rows[0]["present"];
+                ViewBag.leave = dt.Rows[0]["leave"];
+                ViewBag.absent = days - weekends - Convert.ToInt32(dt.Rows[0]["present"]) - Convert.ToInt32(dt.Rows[0]["leave"]) + 1;
+                return View();
+            }
 
+            return RedirectToAction("Index", "Home");
+        }
+        //Current month details of a user
+        public ActionResult currMonthEmpDetails(string empId)
+        {
+
+            if (Session["userId"] != null)
+            {
+                string year, month;
+                DateTime dte = DateTime.Today;
+                year = dte.Year.ToString();
+                month = dte.Month.ToString();
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.getCurrMonthEmpDetail(empId);
+                DataTable dt2 = AmsDataAccess.daysAndHolidaysInMonth(year, month);
+                int days = Convert.ToInt32(dt2.Rows[0]["days"]);
+                int weekends = Convert.ToInt32(dt2.Rows[0]["weekends"]);
+
+                int duration = Convert.ToInt32(dt.Rows[0]["workDuration"]);
+               
+                ViewBag.workHour = duration / 60;
+                ViewBag.workMin = duration % 60;
+                ViewBag.empId = empId;
+                ViewBag.name = dt.Rows[0]["name"];
+                ViewBag.supervisorId = dt.Rows[0]["supervisorId"];
+                ViewBag.present = dt.Rows[0]["present"];
+                ViewBag.leave = dt.Rows[0]["leave"];
+                ViewBag.absent = days - weekends - Convert.ToInt32(dt.Rows[0]["present"]) - Convert.ToInt32(dt.Rows[0]["leave"]);
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
         //Manage Leave
         public ActionResult Leave()
         {

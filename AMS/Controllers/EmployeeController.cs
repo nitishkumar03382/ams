@@ -16,7 +16,13 @@ namespace AMS.Controllers
         public ActionResult EmployeeHome()
         {
             if (Session["userId"] != null)
+            {
+                string empId = Convert.ToString(Session["userId"]);
+                AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
+                DataTable dt = AmsDataAccess.getEmpDetail(empId);
+                ViewBag.empName = dt.Rows[0]["name"];
                 return View();
+            }
             else
                 return RedirectToAction("Index", "Home");
 

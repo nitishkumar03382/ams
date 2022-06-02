@@ -2,7 +2,188 @@
 @{
     ViewBag.Title = "empDetails";
 }
+<style type="text/css">
+    table {
+        width: 70%;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        table-layout: fixed;
+    }
 
-<h2>empDetails</h2>
+    table, th, td {
+        border: 2px solid dimgray;
+        border-radius: 5px;
+    }
+
+
+    th {
+        text-align: left;
+        font-size: 22px;
+        background-color: #838996;
+        background-image: linear-gradient(dimgray,gray,#838996);
+        color: white;
+    }
+
+
+    th, td {
+        padding: 10px;
+        width: 25%;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fff;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #eee;
+    }
+
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        font-family: arial;
+    }
+
+    .main {
+        margin: 2%;
+    }
+
+    .card {
+        width: 20%;
+        display: inline-block;
+        box-shadow: 2px 2px 20px black;
+        border-radius: 5px;
+        margin: 2%;
+    }
+
+    .image img {
+        width: 100%;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    .title {
+        text-align: center;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .des {
+        padding: 10px;
+        text-align: center;
+        padding-top: 10px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background-color: aliceblue;
+    }
+</style>
+  
+    <center>
+        <h1 style="font-size:60px; margin-bottom: 8px; margin-top: 0; font-family:arial; text-align:center; background-color: beige;">
+            Employee Dashboard
+        </h1>
+        <h3>All Time</h3>
+    </center>
+  
+    <center>
+        <table>
+            <tr>
+                <th>Name : </th>
+                <td>  @ViewBag.name</td>
+            </tr>
+            <tr>
+                <th>Employee ID : </th>
+                <td>@ViewBag.empId</td>
+            </tr>
+            <tr>
+                <th>Superviser ID : </th>
+                <td>@ViewBag.supervisorId</td>
+            </tr>
+        </table>
+    </center>
+    <br>
+    <br>
+
+    <div class="main">
+
+        <!--cards -->
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img1.jpg">
+            </div>
+          
+            <div class="title">
+                <h1>
+                    Working Hours
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.workHour Hours @ViewBag.workMin minutes</p>
+            </div>
+        </div>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img2.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Present
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.present Days</p>
+            </div>
+        </div>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img3.jpg">
+            </div>
+          
+            <div class="title">
+                <h1>
+                    Absent
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.absent Days</p>
+            </div>
+        </div>
+        <!--cards -->
+
+
+        <div class="card">
+            <div class="image">
+                <img src="~/Content/img4.jpg">
+            </div>
+            
+            <div class="title">
+                <h1>
+                    Leaves Taken
+                </h1>
+            </div>
+            <div class="des">
+                <p>@ViewBag.leave Days</p>
+            </div>
+        </div>
+        <!--cards -->
+
+
+
+    </div>
+
 
 

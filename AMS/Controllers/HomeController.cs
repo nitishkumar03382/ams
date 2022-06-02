@@ -31,7 +31,6 @@ namespace AMS.Controllers
         [HttpPost]
         public ActionResult Login(Login user)
         {
-            Session["LOGIN"] = "TRUE";
             
             AmsDataAccess objDA = new AmsDataAccess(ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString);
             DataTable dt = AmsDataAccess.GetLoginData(Convert.ToString(user.userId));

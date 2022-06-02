@@ -2,6 +2,9 @@
 @*@model IEnumerable<AMS.Models.Attendance>*@
 @{
     ViewBag.Title = "Admin Page";
+    DateTime dt = DateTime.Today;
+    int month = dt.Month;
+    int year = dt.Year;
 }
 
 
@@ -17,12 +20,12 @@
                            value="Employee Attendance"
                            id="viewAllEmployeeAttendance"
                            class="btn btn-primary btn-lg m-5 p-5"
-                           onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin")'" />
+                           onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin", new {y = year, m = month})'" />
                 </li>
 
                 <li class="list-group-item">
                     <input type="button"
-                           value="Manage Logins"
+                           value="Employee Info"
                            id="viewAllEmployeeAttendance"
                            class="btn btn-primary btn-lg m-5 p-5"
                            onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
@@ -59,7 +62,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Employee_id)
+                            <a href="@Url.Action("currMonthEmpDetails", "Admin", new { empId = item.Employee_id})">@item.Employee_id</a>
                         </td>
                         
                         <td>

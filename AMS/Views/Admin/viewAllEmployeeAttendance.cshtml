@@ -1,23 +1,16 @@
 ﻿
 @model IEnumerable<AMS.Models.AttendanceReport>
+    @{ 
+        string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+        int year = ViewBag.year, month = ViewBag.month;
+    }
 
-<h2>viewAllEmployeeAttendance</h2>
+<h2 class="text-center">Employee Attendance Report</h2>
+<h3 class="text-center">@mArr[month-1] - @year</h3>
 
 <div class="container">
   
-    <div class="row">
-        <div class="col col-md-offset-6">
- 
-            <input type="text" class="form-control" value="year" id="inpYear" placeholder="Year" />
-            <input type="text" class="form-control" value="month" id="inpMonth" placeholder="Month" />
-           
-            <input type="button"
-                class="btn btn-primary" 
-                value="Filter By Year and Month" 
-                onclick= function/>
-             
-        </div>
-    </div>
+  
     <div class="row">
         @* SIDEBAR NAVIGATION *@
         <div class="col-md-3">
@@ -29,12 +22,20 @@
                            class="btn btn-primary btn-lg m-5 p-5"
                            onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin")'" />
                 </li>
+
                 <li class="list-group-item">
                     <input type="button"
-                           value="Manage Logins"
+                           value="Employee Info"
                            id="viewAllEmployeeAttendance"
                            class="btn btn-primary btn-lg m-5 p-5"
                            onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
+                </li>
+                <li class="list-group-item">
+                    <input type="button"
+                           value="Manage Employee Leave"
+                           id="viewAllEmployeeLeave"
+                           class="btn btn-primary btn-lg m-5 p-5"
+                           onclick="location.href='@Url.Action("Leave", "Admin")'" />
                 </li>
             </ul>
         </div> @* SIDEBAR NAVIGATION END!! *@
@@ -65,7 +66,9 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.empId)
+                            @*@Html.ActionLink((string)@Html.DisplayFor(modelItem => item.empId), "currMonthEmpDetails", new { empId = item.empId })*@
+                            <a href="@Url.Action("currMonthEmpDetails", "Admin", new { empId = item.empId})">@item.empId</a>
+                            
                         </td>
 
                         <td>
@@ -83,6 +86,15 @@
                     </tr>
                 }
             </table>
+            <div class="row">
+    
+                <input type="button"
+                    class="btn btn-primary"
+                    value="Filter By Year and Month"
+                    onclick= "location.href='@Url.Action("filterByYearMonth", "Admin")'"/>
+
+            </div>
+        
         </div>
     </div>
 </div>

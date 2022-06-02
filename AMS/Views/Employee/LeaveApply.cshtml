@@ -3,20 +3,34 @@
 @{
     ViewBag.Title = "LeaveApply";
 }
+<div class="leavePage">
+    <h2>LeaveApply</h2>
+    emp id : @ViewBag.empId
+    @using (Html.BeginForm("SendLeaveApplication", "Employee", FormMethod.Post))
+    {
 
-<h2>LeaveApply</h2>
-emp id : @ViewBag.empId
-@using (Html.BeginForm("SendLeaveApplication", "Employee", FormMethod.Post))
-{
-    <form>
-        <label>Reason For Leave: </label> @Html.TextBoxFor(m => m.leave_reason)  <br />
-        <label>Leave Start Date</label> @Html.TextBoxFor(m => m.leave_start_date) <br />
-        <label>Days</label> @Html.TextBoxFor(m => m.num_leave_days) <br />
-        <input type="submit"
-               value="Apply for leave"
-               id="leaveApplybtn"
-               class="btn btn-primary btn-lg m-5 p-5"
-                />
-    </form>
-}
+        <div class="form">
+            <form>
+                <label>
+                    Reason For Leave:  @Html.TextBoxFor(m => m.leave_reason,
+                                                 new { placeholder = "Enter the reason for leave", type = "text" })
+                </label> <br />
+                <label>
+                    Leave Start Date: @Html.TextBoxFor(m => m.leave_start_date,
+                                               new { placeholder = "DATE", type = "DATE" })
+                </label><br />
+                <label>
+                    Number Of Days: @Html.TextBoxFor(m => m.num_leave_days,
+                                   new { placeholder = "Number of days for leave", type = "number" }) <br />
+                </label>
+                <input type="submit"
+                       value="Apply for leave"
+                       id="leaveApplybtn"
+                       class="btn btn-primary btn-lg m-5 p-5" />
+            </form>
+        </div>
+
+    }
+</div>
+
 

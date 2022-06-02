@@ -91,7 +91,17 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\empIndexUser.css" />
+    <Content Include="Content\EmployeeHome.css" />
+    <Content Include="Content\img1.jpg" />
+    <Content Include="Content\img2.jpg" />
+    <Content Include="Content\img3.jpg" />
+    <Content Include="Content\img4.jpg" />
+    <Content Include="Content\LeaveApply.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\createUser.css" />
+    <Content Include="Content\viewAtdReport.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -124,6 +134,7 @@
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\AttendanceReport.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeDetail.cs" />
     <Compile Include="Models\Leave.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,7 +144,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\loginPage.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Employee\EmployeeHome.cshtml" />
@@ -141,11 +151,13 @@
     <Content Include="Views\Employee\viewAtdReport.cshtml" />
     <Content Include="Views\Admin\manageLogin.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Leave.cshtml" />
     <Content Include="Views\Admin\AllTimeLeave.cshtml" />
     <Content Include="Views\Home\messageHandler.cshtml" />
     <Content Include="Views\Admin\empDetails.cshtml" />
+    <Content Include="Views\Admin\currMonthEmpDetails.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\filterByYearMonth.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

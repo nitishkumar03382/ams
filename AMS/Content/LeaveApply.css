@@ -1,0 +1,26 @@
+﻿.leavecontainer{
+    /*background:#cef86b;*/ 
+    background:#ebf4be;
+    border-radius:8px;
+    box-shadow:0px 0px 8px 0px #cef86b;
+}
+.bhead{
+    margin-left:200px;
+    font-family:Arial;
+    font-size:medium;
+}
+
+.subhead{
+    margin-left:200px;
+    font-family:Arial;
+    font-size:large;
+    font-weight:bold;
+    color:#ff6a00;
+}
+
+.bcontent{
+    margin-top:25px;
+    padding:10px;
+    position:inherit;
+
+}

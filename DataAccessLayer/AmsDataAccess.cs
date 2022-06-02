@@ -193,6 +193,23 @@ namespace DataAccessLayer
             }
             return dt;
         }
+        //daysAndHolidaysFromCurrDate of a employee
+        public static DataTable daysAndHolidaysFromCurrDate(string empId)
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[daysAndHolidaysFromCurrDate]", _dbConnection))
+            {
+                SqlParameter param1 = new SqlParameter("@empId", empId);
+                sqlComm.Parameters.Add(param1);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
 
         //Get All Login Data
         public static DataTable getAllLoginData()
@@ -272,6 +289,118 @@ namespace DataAccessLayer
             return noOfRowsAffected;
 
         }
+        //  //Employe detail from his start date(join date)
+        public static DataTable getEmpDetail(string empId)
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getEmployeeData]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param1 = new SqlParameter("@empId", empId);
+                sqlComm.Parameters.Add(param1);
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+        //Current month a employee details
+        public static DataTable getCurrMonthEmpDetail(string empId)
+        {
+            DataTable dt = null;
+            using (SqlCommand sqlComm = new SqlCommand("[dbo].[getCurrMonthEmployeeData]", _dbConnection))
+            {
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlParameter param1 = new SqlParameter("@empId", empId);
+                sqlComm.Parameters.Add(param1);
+                using (SqlDataAdapter sqlDA = new SqlDataAdapter(sqlComm))
+                {
+                    dt = new DataTable();
+                    sqlDA.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        //CREATE UPDATE DELETE
+        public static int CreateUser(string userId, string pswd, string userTypeId)
+        {
+            int noOfRowAffected = -1;
+            try
+            {
+                _dbConnection.Open();
+                using (SqlCommand sqlComm = new SqlCommand("[dbo].[createUser]", _dbConnection))
+                {
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@userId", userId);
+                    sqlComm.Parameters.Add(param1);
+                    SqlParameter param2 = new SqlParameter("@pswd", pswd);
+                    sqlComm.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter("@userTypeId", Convert.ToInt32(userTypeId));
+                    sqlComm.Parameters.Add(param3);
+                    noOfRowAffected = sqlComm.ExecuteNonQuery();
+                }
+                _dbConnection.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return noOfRowAffected;
+        }
+        //update
+        public static int EditUser(string userId, string pswd, string userTypeId)
+        {
+            int noOfRowAffected = -1;
+            try
+            {
+                _dbConnection.Open();
+                using (SqlCommand sqlComm = new SqlCommand("[dbo].[updateUser]", _dbConnection))
+                {
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@userId", userId);
+                    sqlComm.Parameters.Add(param1);
+                    SqlParameter param2 = new SqlParameter("@pswd", pswd);
+                    sqlComm.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter("@userTypeId", userTypeId);
+                    sqlComm.Parameters.Add(param3);
+                    noOfRowAffected = sqlComm.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return noOfRowAffected;
+        }
+
+        public static int DeleteUser(string userId)
+        {
+            int noOfRowAffected = -1;
+            try
+            {
+                _dbConnection.Open();
+                using (SqlCommand sqlComm = new SqlCommand("[dbo].[deleteUser]", _dbConnection))
+                {
+                    sqlComm.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@userId", userId);
+                    sqlComm.Parameters.Add(param1);
+                    noOfRowAffected = sqlComm.ExecuteNonQuery();
+                }
+                _dbConnection.Close();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return noOfRowAffected;
+        }
+
+
 
     }
 }

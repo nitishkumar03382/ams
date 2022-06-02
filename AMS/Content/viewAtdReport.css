@@ -1,0 +1,25 @@
+﻿.table{
+    background:#fbbcbc;
+    margin-top:25px;
+}
+.table th{
+    background:#dbdc08;
+    font-family:Arial;
+    font-weight:bold;
+    font-size:large;
+}
+
+.newUser input{
+    color:black;
+    margin-top:12px;
+    margin-bottom:12px;
+}
+
+.crud{
+    font-weight:bold;
+    font-size:medium;
+}
+
+.nevi input{
+    border:0px;
+}

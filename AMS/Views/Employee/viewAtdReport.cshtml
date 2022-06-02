@@ -2,13 +2,15 @@
 
 @{
     ViewBag.Title = "viewAtdReport";
+    DateTime dte = DateTime.Today;
+    string year = dte.Year.ToString();
+    int month = dte.Month;
+    string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 }
 
-<h2>viewAtdReport</h2>
+<h2 class="text-center">Your @mArr[@month-1] Attendance Report</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -47,11 +49,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.AttendanceStatus)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+
     </tr>
 }
 
