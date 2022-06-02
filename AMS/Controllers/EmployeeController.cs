@@ -130,6 +130,11 @@ namespace AMS.Controllers
                 return View();
             return RedirectToAction("Index", "Home");
         }
-
+        public ActionResult logout()
+        {
+            Session["userId"] = null;
+            Session["userTypeId"] = null;
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

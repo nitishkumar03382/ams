@@ -9,28 +9,28 @@
 
 
 
-<div class="container">
+<div class="main">
     <h2>Admin</h2>
     <div class="row">
         @* SIDEBAR NAVIGATION *@
-        <div class="col-md-3">
-            <ul class="list-group">
-                <li class="list-group-item">
+        <div class="col-md-4">
+            <ul class="sidebar">
+                <li class="list">
                     <input type="button"
-                           value="Employee Attendance"
+                           value="Monthly Attendance Report"
                            id="viewAllEmployeeAttendance"
                            class="btn btn-primary btn-lg m-5 p-5"
                            onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin", new {y = year, m = month})'" />
                 </li>
 
-                <li class="list-group-item">
+                <li class="list">
                     <input type="button"
                            value="Employee Info"
                            id="viewAllEmployeeAttendance"
                            class="btn btn-primary btn-lg m-5 p-5"
                            onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
                 </li>
-                <li class="list-group-item">
+                <li class="list">
                     <input type="button"
                            value="Manage Employee Leave"
                            id="viewAllEmployeeLeave"
@@ -55,6 +55,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.logoutTime)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AttendanceStatus)
+                    </th>
                     <th></th>
                 </tr>
 
@@ -70,6 +73,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.logoutTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AttendanceStatus)
                         </td>
                       
                     </tr>

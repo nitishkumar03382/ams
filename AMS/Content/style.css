@@ -66,6 +66,13 @@ html,body{
 }
 
 
+.sidebar{
+    background-color: aquamarine
+}
+.sidebar .list{
+
+}
+
 @media (max-width: 600px){
     .loginPage{
         width:100%;
