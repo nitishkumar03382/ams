@@ -65,16 +65,7 @@ html,body{
     font-weight:bolder;
 }
 
-.btn-container{
-    margin: 0 auto;
-    display: flex;
-    justify-content:center;
-    align-items: center;
 
-}
-.btn-container div{
-    display: inline;
-}
 @media (max-width: 600px){
     .loginPage{
         width:100%;
