@@ -70,6 +70,7 @@ html,body{
     background-color: aquamarine;
     display:flex;
     flex-direction:row;
+    margin-bottom: 50px; 
 }
 .sidebar .list{
     display: inline;
