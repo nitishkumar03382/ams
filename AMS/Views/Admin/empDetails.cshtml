@@ -19,7 +19,10 @@
         border: 2px solid dimgray;
         border-radius: 5px;
     }
-
+    center table td{
+        font-size: 22px;
+        font-weight:bold;
+    }
 
     th {
         text-align: left;
@@ -93,7 +96,7 @@
     <li class="list">
         <input type="button"
                value="Admin"
-               id="viewAllEmployeeAttendance"
+               id="index"
                style="background-color:white; color: red; text-align:left;"
                class="btn btn-link btn-lg m-5 p-5"
                onclick="location.href='@Url.Action("Index", "Admin")'" />
@@ -109,21 +112,21 @@
     <li class="list">
         <input type="button"
                value="Employee Info"
-               id="viewAllEmployeeAttendance"
+               id="manageLogin"
                class="btn btn-link btn-lg m-5 p-5"
                onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
     </li>
     <li class="list">
         <input type="button"
                value="Manage Employee Leave"
-               id="viewAllEmployeeLeave"
+               id="leave"
                class="btn btn-link btn-lg m-5 p-5"
                onclick="location.href='@Url.Action("Leave", "Admin")'" />
     </li>
     <li class="list">
         <input type="button"
                value="Log Out!"
-               id="viewAllEmployeeLeave"
+               id="logout"
                style="background-color:#170e0e; color:white"
                class="btn btn-link btn-lg m-5 p-5"
                onclick="location.href='@Url.Action("logout", "Admin")'" />

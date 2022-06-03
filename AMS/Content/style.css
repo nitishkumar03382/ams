@@ -105,6 +105,9 @@ html,body{
     align-items:center;
     margin: 5px auto;
 }
+#leave:hover, #viewAllEmmployeeAttendance:hover, #manageLogin:hover{
+    background-color: gray;
+}
 @media (max-width: 600px){
     .loginPage{
         width:100%;
