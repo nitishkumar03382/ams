@@ -164,7 +164,7 @@ namespace AMS.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("messageHandler", "Home", new { msg = "Can`t add this record!. It might exist aready.", msgType = "warning" });
+                    return RedirectToAction("messageHandler", "Home", new { msg = "Can`t add this record!. It might exist already.", msgType = "warning" });
 
                 }
             }

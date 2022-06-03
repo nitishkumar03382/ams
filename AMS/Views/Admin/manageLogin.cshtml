@@ -6,6 +6,19 @@
     DateTime dt = DateTime.Today;
     int year = dt.Year, month = dt.Month;
 }
+<style type="text/css">
+    /*For Navigation Buttons*/
+     .sidebar .btn-link{
+    color:white;
+    background-color:blue;
+    margin: 3px;
+    opacity: 1;
+    transition:0.4s;
+}
+    .btn-link:hover, .btn-link:focus {
+        opacity: 0.9;
+    }
+</style>
 <div class="main">
     <ul class="sidebar">
         <li class="list">
@@ -51,7 +64,7 @@
     <div class="atd-table">
         <h2>Employee Login Details</h2>
         <hr width="60%"/>
-        <p>
+        <p style="align-items:initial">
             @Html.ActionLink("Create New", "Create")
         </p>
         <table class="table">

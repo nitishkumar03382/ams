@@ -80,13 +80,16 @@ html,body{
     display: inline;
     margin-left: 10px;
 }
-.sidebar .btn-link{
+ .sidebar .btn-link{
     color:white;
-    background-color:gray;
+    background-color:blue;
     margin: 3px;
+    opacity: 1;
+    transition:0.4s;
 }
 .btn-link:hover, .btn-link:focus{
-    background-color:white;
+    opacity: 0.9;
+
 }
 .atd-table{
     display:flex;
