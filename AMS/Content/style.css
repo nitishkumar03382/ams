@@ -85,7 +85,9 @@ html,body{
     background-color:gray;
     margin: 3px;
 }
-
+.sidebar .btn-link:hover{
+    background-color:white;
+}
 .atd-table{
     display:flex;
     flex-direction:column;
@@ -105,14 +107,7 @@ html,body{
     align-items:center;
     margin: 5px auto;
 }
-.btn{
-    opacity: 1;
-    transition: 0.3s;
-}
-.btn:hover{
-    background-color: gray;
-    opacity: 0.85;
-}
+
 @media (max-width: 600px){
     .loginPage{
         width:100%;
