@@ -85,7 +85,7 @@ html,body{
     background-color:gray;
     margin: 3px;
 }
-.sidebar .btn-link:hover{
+.btn-link:hover, .btn-link:focus{
     background-color:white;
 }
 .atd-table{
