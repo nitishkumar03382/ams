@@ -1,6 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "empDetails";
+    DateTime dt = DateTime.Today;
+    int year = Convert.ToInt32(ViewBag.year);
+    int month = Convert.ToInt32(ViewBag.month);
+    string[] mArr = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 }
 <style type="text/css">
     table {
@@ -84,12 +88,51 @@
         background-color: aliceblue;
     }
 </style>
-  
+  @* Navbar *@
+<ul class="sidebar">
+    <li class="list">
+        <input type="button"
+               value="Admin"
+               id="viewAllEmployeeAttendance"
+               style="background-color:white; color: red; text-align:left;"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("Index", "Admin")'" />
+    </li>
+    <li class="list">
+        <input type="button"
+               value="Monthly Attendance Report"
+               id="viewAllEmployeeAttendance"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("viewAllEmployeeAttendance", "Admin", new {y = year, m = month})'" />
+    </li>
+
+    <li class="list">
+        <input type="button"
+               value="Employee Info"
+               id="viewAllEmployeeAttendance"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("manageLogin", "Admin")'" />
+    </li>
+    <li class="list">
+        <input type="button"
+               value="Manage Employee Leave"
+               id="viewAllEmployeeLeave"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("Leave", "Admin")'" />
+    </li>
+    <li class="list">
+        <input type="button"
+               value="Log Out!"
+               id="viewAllEmployeeLeave"
+               style="background-color:#170e0e; color:white"
+               class="btn btn-link btn-lg m-5 p-5"
+               onclick="location.href='@Url.Action("logout", "Admin")'" />
+    </li>
+</ul>
+@* SIDEBAR NAVIGATION END!! *@
     <center>
-        <h1 style="font-size:60px; margin-bottom: 8px; margin-top: 0; font-family:arial; text-align:center; background-color: beige;">
-            Employee Dashboard
-        </h1>
-        <h3>All Time</h3>
+        <h1>@ViewBag.name (@ViewBag.empId)</h1>
+        <h3> All Time Report</h3>
     </center>
   
     <center>
