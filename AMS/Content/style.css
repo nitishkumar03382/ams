@@ -105,8 +105,13 @@ html,body{
     align-items:center;
     margin: 5px auto;
 }
-#leave:hover, #viewAllEmmployeeAttendance:hover, #manageLogin:hover{
+.btn{
+    opacity: 1;
+    transition: 0.3s;
+}
+.btn:hover{
     background-color: gray;
+    opacity: 0.85;
 }
 @media (max-width: 600px){
     .loginPage{
