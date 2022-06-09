@@ -100,12 +100,29 @@ namespace AMS.Controllers
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
+                        string atdStat = Convert.ToString(dt.Rows[i]["AttendanceStatus"]);
+                        if(atdStat == "p")
+                        {
+                            atdStat = "Present";
+                        }
+                        else if(atdStat == "i")
+                        {
+                            atdStat = "Logged In";
+                        }
+                        else if(atdStat == "l")
+                        {
+                            atdStat = "Leave";
+                        }
+                        else
+                        {
+                            atdStat = "Absent";
+                        }
                         Attendance d = new Attendance();
                         d.Employee_id = Convert.ToString(dt.Rows[i]["Employee_id"]);
                         d.Date = Convert.ToString(dt.Rows[i]["Date"]);
                         d.loginTime = Convert.ToString(dt.Rows[i]["loginTime"]);
                         d.logoutTime = Convert.ToString(dt.Rows[i]["logoutTime"]);
-                        d.AttendanceStatus = Convert.ToString(dt.Rows[i]["AttendanceStatus"]);
+                        d.AttendanceStatus = atdStat;
                         obj.Add(d);
 
                     }

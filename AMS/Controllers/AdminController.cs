@@ -40,7 +40,7 @@ namespace AMS.Controllers
                         }
                         else
                         {
-                            atdStat = "Does Not Logged in";
+                            atdStat = "Not Logged in";
                         }
                         Attendance d = new Attendance();
 
